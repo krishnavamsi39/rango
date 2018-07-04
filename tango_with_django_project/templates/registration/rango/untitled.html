@@ -1,0 +1,86 @@
+<ul>
+{% if user.is_authenticated %}
+<li><a href="{% url 'restricted' %}">Restricted Page</a></li>
+<li><a href="{% url 'add_category' %}">Add a New Category</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
+{% else %}
+<li><a href="{% url 'login' %}">Sign In</a></li>
+<li><a href="{% url 'register' %}">Sign Up</a></li>
+{% endif %}
+<li><a href="{% url 'about' %}">About</a></li>
+<li><a href="{% url 'index' %}">Index</a></li>
+</ul>
+<!-- <!DOCTYPE html>
+{% load rango_template_tags %}
+{% load staticfiles %}
+<html>
+<head>
+<title>
+Rango -
+{% block title_block %}
+How to Tango with Django!
+{% endblock %}
+</title>
+</head>
+<body>
+<div>
+{% block body_block %}
+{% endblock %}
+</div>
+<hr />
+<div>
+
+</div>
+<div>
+<ul>
+{% if user.is_authenticated %}
+<li><a href="{% url 'add_category' %}">Add New Category</a></li>
+{% else %}
+<li><a href="{% url 'register' %}">Register</a></li>
+<li><a href="{% url 'login' %}">Login</a></li>
+{% endif %}
+<li><a href="{% url 'about' %}">About</a></li>
+<li><a href="{% url 'index' %}">Index</a></li>
+
+
+</ul>
+</div>
+</body>
+</html>
+-->
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+Register
+{% endblock %}
+{% block body_block %}
+<h1>About Page</h1>
+{% if registered %}
+Rango says: <strong>thank you for registering!</strong>
+<a href="/rango/">Return to the homepage.</a><br />
+{% else %}
+Rango says: <strong>register here!</strong><br />
+<form id="user_form" method="post" action="/rango/register/"
+enctype="multipart/form-data">
+{% csrf_token %}
+<!-- Display each form -->
+{{ user_form.as_p }}
+{{ profile_form.as_p }}
+<!-- Provide a button to click to submit the form. -->
+<input type="submit" name="submit" value="Register" />
+</form>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
